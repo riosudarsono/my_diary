@@ -7,14 +7,15 @@ import android.view.ViewGroup
 import android.widget.PopupMenu
 import androidx.recyclerview.widget.RecyclerView
 import com.rio.mydiary.R
+import com.rio.mydiary.local.Diary
 import com.rio.mydiary.model.DiaryModel
 import kotlinx.android.synthetic.main.view_diary.view.*
 import java.util.concurrent.Executors
 
-class DiaryAdapter(private val activity: Activity?, private var data: MutableList<DiaryModel>) : RecyclerView.Adapter<DiaryAdapter.Holder>() {
+class DiaryAdapter(private val activity: Activity?, private var data: List<Diary>) : RecyclerView.Adapter<DiaryAdapter.Holder>() {
 
-    fun addItems(data: DiaryModel) {
-        this.data.add(data)
+    fun setItems(data: List<Diary>) {
+        this.data = data
         notifyDataSetChanged()
     }
 
@@ -30,9 +31,9 @@ class DiaryAdapter(private val activity: Activity?, private var data: MutableLis
     }
 
     inner class Holder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        fun bind(mData: DiaryModel, position: Int) {
+        fun bind(mData: Diary, position: Int) {
             with(itemView) {
-                tv_name.text = mData.name
+                tv_name.text = mData.title
                 tv_date.text = mData.date
                 tv_story.text = mData.story
             }
